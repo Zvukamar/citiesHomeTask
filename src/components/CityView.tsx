@@ -8,7 +8,7 @@ interface CityViewProps {
 
 const CityView = ({ city }: CityViewProps) => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.cityName}>
                 {city.name}
             </Text>
@@ -24,9 +24,14 @@ const CityView = ({ city }: CityViewProps) => {
 export default CityView;
 
 const styles = StyleSheet.create({
-    image: {
+    container: {
         width: 160,
         height: 160,
+        marginBottom: 16
+    },
+    image: {
+        width: "100%",
+        height: "100%",
     },
     cityName: {
         color: colors.black,
