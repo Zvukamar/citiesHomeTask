@@ -7,6 +7,7 @@ import { CityDetailsScreenProps } from "../navigation";
 import { colors } from "../utils";
 import { fetchWeather } from "../api/weather";
 import { WeatherType } from "../utils/types";
+import { celsiusSymbol, fahrenheitSymbol } from "../utils/const";
 
 const CityDetailsScreen = ({ route, navigation }: CityDetailsScreenProps) => {
     const { city, isInternationalUnit } = route.params || {};
@@ -37,6 +38,7 @@ const CityDetailsScreen = ({ route, navigation }: CityDetailsScreenProps) => {
                 <ExtraCityDetails
                     city={city}
                     weather={weather}
+                    units={isInternationalUnit ? celsiusSymbol : fahrenheitSymbol}
                 />
             </ScrollView>
         </View >

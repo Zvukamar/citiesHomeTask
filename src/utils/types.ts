@@ -16,7 +16,6 @@ export type CoordinatesType = {
 };
 
 export type WeatherType = {
-    weather: { id: number; main: string; description: string; }[],
     main: { temp: number; feels_like: number; temp_min: number; temp_max: number; humidity: number; },
     wind: { speed: number },
     sys: { sunrise: number; sunset: number; },
