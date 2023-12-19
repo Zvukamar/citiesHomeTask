@@ -31,23 +31,23 @@ const ExtraCityDetails = ({ city, weather, units }: ExtraCityDetailsProps) => {
             <View style={styles.wrapperContainer}>
                 <View style={styles.container}>
                     <Text style={styles.titleText}>Temperature</Text>
-                    <Text style={styles.contentText}>{weather?.main.temp}{units}</Text>
+                    <Text style={styles.contentText}>{weather?.main?.temp}{units}</Text>
                 </View>
                 <View style={styles.container}>
                     <Text style={styles.titleText}>Feels Like</Text>
-                    <Text style={styles.contentText}>{weather?.main.feels_like}{units}</Text>
+                    <Text style={styles.contentText}>{weather?.main?.feels_like}{units}</Text>
                 </View>
 
                 <View style={styles.container}>
                     <Text style={styles.titleText}>Humidity</Text>
-                    <Text style={styles.contentText}>{weather?.main.humidity}%</Text>
+                    <Text style={styles.contentText}>{weather?.main?.humidity}%</Text>
                 </View>
             </View>
 
             <View style={styles.wrapperContainer}>
                 <View style={styles.container}>
                     <Text style={styles.titleText}>Wind</Text>
-                    <Text style={styles.contentText}>{weather?.wind.speed} km/h</Text>
+                    <Text style={styles.contentText}>{weather?.wind?.speed} km/h</Text>
                 </View>
             </View>
         </View>
