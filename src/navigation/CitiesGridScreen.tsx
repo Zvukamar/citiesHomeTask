@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useReducer, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import CityView from "../components/CityView";
 import CitiesGridHeader from "../components/CitiesGridHeader";
@@ -15,13 +15,15 @@ type RenderItemType = {
 
 const CitiesGridScreen = ({ navigation }: CitiesGridScreenProps) => {
     const [searchInput, setSearchInput] = useState('');
+    const [incSort, toggleSort] = useReducer(prev => prev * -1, 1);
+    const [isInternationalUnit, toggleTemperatureUnit] = useReducer(prev => !prev, true);
 
     const activeCities = useMemo(() => {
         return mockData?.cities?.filter(({ name, country, active }) => (
             active &&
             (name.toLowerCase().includes(searchInput) || country.toLowerCase().includes(searchInput))
-        ));
-    }, [searchInput]);
+        )).sort((a, b) => a.name[0] > b.name[0] ? incSort : incSort * -1);
+    }, [searchInput, incSort]);
 
     const renderItem = ({ item: city }: RenderItemType) => (
         <CityView
@@ -38,14 +40,16 @@ const CitiesGridScreen = ({ navigation }: CitiesGridScreenProps) => {
     };
 
     const navigateToDetails = (city: CityType) => {
-        navigation.navigate('CityDetails', { city });
-    }
+        navigation.navigate('CityDetails', { city, isInternationalUnit });
+    };
 
     return (
         <View style={styles.container}>
             {/* Grid Header */}
             <CitiesGridHeader
                 onChangeText={handleChangeText}
+                toggleTemperatureUnit={toggleTemperatureUnit}
+                onSort={toggleSort}
             />
 
             {/* Grid List */}

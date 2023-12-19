@@ -8,7 +8,7 @@ import { colors } from '../utils';
 
 type RootStackParamList = {
     Main: undefined,
-    CityDetails: { city: CityType };
+    CityDetails: { city: CityType, isInternationalUnit: boolean };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

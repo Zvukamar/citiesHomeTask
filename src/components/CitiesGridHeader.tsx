@@ -5,9 +5,11 @@ import { colors } from "../utils";
 
 interface CitiesGridHeaderProps {
     onChangeText: (text: string) => void;
+    toggleTemperatureUnit: () => void;
+    onSort: () => void;
 }
 
-const CitiesGridHeader = ({ onChangeText }: CitiesGridHeaderProps) => {
+const CitiesGridHeader = ({ onChangeText, onSort, toggleTemperatureUnit }: CitiesGridHeaderProps) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 1 }}>
@@ -20,7 +22,7 @@ const CitiesGridHeader = ({ onChangeText }: CitiesGridHeaderProps) => {
                 <SvgView
                     name='sort'
                     size={24}
-                    onPress={() => { }}
+                    onPress={onSort}
                     style={styles.sortIcon}
                 />
             </View>
@@ -28,7 +30,7 @@ const CitiesGridHeader = ({ onChangeText }: CitiesGridHeaderProps) => {
             <SwitchButton
                 lText="°C"
                 rText="°F"
-                onSwitch={() => { }}
+                onSwitch={toggleTemperatureUnit}
             />
         </View>
     )

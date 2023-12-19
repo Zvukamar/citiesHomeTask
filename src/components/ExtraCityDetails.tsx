@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import { CityType } from "../utils/types";
+import { CityType, WeatherType } from "../utils/types";
 
 interface ExtraCityDetailsProps {
     city: CityType;
+    weather: WeatherType | null;
 }
 
-const ExtraCityDetails = ({ city }: ExtraCityDetailsProps) => {
+const ExtraCityDetails = ({ city, weather }: ExtraCityDetailsProps) => {
     const { continent, coords } = city;
 
     return (
@@ -23,6 +24,11 @@ const ExtraCityDetails = ({ city }: ExtraCityDetailsProps) => {
                     <Text style={styles.titleText}>Longitude</Text>
                     <Text style={styles.contentText}>{coords.lng}</Text>
                 </View>
+            </View>
+
+            {/* Weather */}
+            <View>
+
             </View>
         </View>
     );
