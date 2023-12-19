@@ -28,6 +28,7 @@ const CitiesGridScreen = ({ navigation }: CitiesGridScreenProps) => {
             key={city.image}
             city={city}
             onPress={navigateToDetails}
+            withTitle
         />
     );
 

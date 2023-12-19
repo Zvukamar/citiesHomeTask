@@ -5,24 +5,31 @@ import { colors } from "../utils";
 
 interface CityViewProps {
     city: CityType;
-    onPress: (city: CityType) => void;
+    onPress?: (city: CityType) => void;
+    withTitle?: boolean;
 }
 
 const DEFAULT_IMAGE_URL = 'https://picsum.photos/id/0/500/500';
 
-const CityView = ({ city, onPress }: CityViewProps) => {
+const CityView = ({ city, onPress, withTitle }: CityViewProps) => {
     const [image, setImage] = useState(city.image);
     const setDefaultImageOnError = () => setImage(DEFAULT_IMAGE_URL);
 
     const handlePress = () => {
-        onPress(city);
+        onPress?.(city);
     }
 
     return (
-        <TouchableOpacity activeOpacity={0.7} onPress={handlePress}>
-            <Text style={styles.title}>
-                {city.name} - {city.country}
-            </Text>
+        <TouchableOpacity
+            activeOpacity={0.7}
+            disabled={!onPress}
+            onPress={handlePress}>
+
+            {withTitle && (
+                <Text style={styles.title}>
+                    {city.name} - {city.country}
+                </Text>
+            )}
 
             <Image
                 src={image}

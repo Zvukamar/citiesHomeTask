@@ -4,6 +4,7 @@ import { NavigationContainer, NavigationProp, RouteProp } from '@react-navigatio
 import CitiesGridScreen from './CitiesGridScreen';
 import CityDetailsScreen from './CityDetailsScreen';
 import { CityType } from '../utils/types';
+import { colors } from '../utils';
 
 type RootStackParamList = {
     Main: undefined,
@@ -15,7 +16,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const RootNaivgation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+                initialRouteName='Main'
+                screenOptions={{ headerTintColor: colors.black }}>
                 <Stack.Screen
                     name="Main"
                     component={CitiesGridScreen}
@@ -24,6 +27,7 @@ const RootNaivgation = () => {
                 <Stack.Screen
                     name="CityDetails"
                     component={CityDetailsScreen}
+                    options={{ headerBackTitleVisible: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
