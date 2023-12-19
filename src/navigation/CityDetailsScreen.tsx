@@ -10,7 +10,7 @@ import { WeatherType } from "../utils/types";
 
 const CityDetailsScreen = ({ route, navigation }: CityDetailsScreenProps) => {
     const { city, isInternationalUnit } = route.params || {};
-    const { name, country, coords } = city;
+    const { name, country } = city;
     const [weather, setWeather] = useState<WeatherType | null>(null);
 
     useEffect(() => {
@@ -22,8 +22,10 @@ const CityDetailsScreen = ({ route, navigation }: CityDetailsScreenProps) => {
     useEffect(() => {
         const getWeather = async () => {
             const unit = isInternationalUnit ? 'standard' : 'imperial';
-            const res = await fetchWeather(coords.lng, coords.lat, unit);
-            setWeather(res as WeatherType);
+            try {
+                const res = await fetchWeather(name, unit);
+                setWeather(res as WeatherType);
+            } catch (err) { console.log({ err }) }
         }
         getWeather();
     }, []);
