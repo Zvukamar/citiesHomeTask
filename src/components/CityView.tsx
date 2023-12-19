@@ -1,20 +1,25 @@
 import { useState } from "react";
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { CityType } from "../utils/types";
 import { colors } from "../utils";
 
 interface CityViewProps {
     city: CityType;
+    onPress: (city: CityType) => void;
 }
 
 const DEFAULT_IMAGE_URL = 'https://picsum.photos/id/0/500/500';
 
-const CityView = ({ city }: CityViewProps) => {
+const CityView = ({ city, onPress }: CityViewProps) => {
     const [image, setImage] = useState(city.image);
     const setDefaultImageOnError = () => setImage(DEFAULT_IMAGE_URL);
 
+    const handlePress = () => {
+        onPress(city);
+    }
+
     return (
-        <>
+        <TouchableOpacity activeOpacity={0.7} onPress={handlePress}>
             <Text style={styles.title}>
                 {city.name} - {city.country}
             </Text>
@@ -29,7 +34,7 @@ const CityView = ({ city }: CityViewProps) => {
             <Text style={styles.description}>
                 {city.description}
             </Text>
-        </>
+        </TouchableOpacity>
     )
 }
 

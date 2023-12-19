@@ -1,17 +1,23 @@
 import { useMemo, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import CityView from "./CityView";
-import CitiesGridHeader from "./CitiesGridHeader";
-import CitiesGridNoResult from "./CitiesGridNoResult";
+import CityView from "../components/CityView";
+import CitiesGridHeader from "../components/CitiesGridHeader";
+import CitiesGridNoResult from "../components/CitiesGridNoResult";
+import { MainScreenNavigationProp } from "../navigation";
 import mockData from "../__mock__/data.json";
 import { CityType } from "../utils/types";
+import { colors } from "../utils";
 
 type RenderItemType = {
     item: CityType;
     index: number;
 }
 
-const CitiesGrid = () => {
+interface CitiesGridScreenProps {
+    navigation: MainScreenNavigationProp;
+}
+
+const CitiesGridScreen = ({ navigation }: CitiesGridScreenProps) => {
     const [searchInput, setSearchInput] = useState('');
 
     const activeCities = useMemo(() => {
@@ -25,6 +31,7 @@ const CitiesGrid = () => {
         <CityView
             key={city.image}
             city={city}
+            onPress={navigateToDetails}
         />
     );
 
@@ -32,6 +39,10 @@ const CitiesGrid = () => {
         const trimmed = text.trim().toLowerCase();
         setSearchInput(trimmed);
     };
+
+    const navigateToDetails = (city: CityType) => {
+        navigation.navigate('CityDetails', { city });
+    }
 
     return (
         <View style={styles.container}>
@@ -54,12 +65,13 @@ const CitiesGrid = () => {
     );
 }
 
-export default CitiesGrid;
+export default CitiesGridScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 14,
+        backgroundColor: colors.white
     },
     scrollViewContainer: {
         gap: 24,

@@ -1,15 +1,14 @@
 import React from 'react';
 import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
-import CitiesGrid from './components/CitiesGrid';
+
+import RootNaivgation from './navigation';
 import { colors } from './utils';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle={'dark-content'}
-      />
-      <CitiesGrid />
+      <StatusBar barStyle={'dark-content'} />
+      <RootNaivgation />
     </SafeAreaView>
   );
 }
