@@ -1,3 +1,5 @@
+import { colors, svgMap } from "../utils";
+
 export type CityType = {
     name: string;
     continent: string;
@@ -12,3 +14,6 @@ export type CoordinatesType = {
     lat: number;
     lng: number;
 };
+
+export type ColorType = keyof typeof colors;
+export type SvgType = keyof typeof svgMap;

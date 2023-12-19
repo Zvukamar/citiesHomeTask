@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
-import { FlatList, StyleSheet, TextInput, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import CityView from "./CityView";
+import CitiesGridHeader from "./CitiesGridHeader";
 import CitiesGridNoResult from "./CitiesGridNoResult";
 import mockData from "../__mock__/data.json";
-import { colors } from "../utils";
 import { CityType } from "../utils/types";
 
 type RenderItemType = {
@@ -14,11 +14,11 @@ type RenderItemType = {
 const CitiesGrid = () => {
     const [searchInput, setSearchInput] = useState('');
 
-    const actionCities = useMemo(() => {
-        return mockData?.cities?.filter(city =>
-            city.active &&
-            (city.name.includes(searchInput) || city.country.includes(searchInput))
-        );
+    const activeCities = useMemo(() => {
+        return mockData?.cities?.filter(({ name, country, active }) => (
+            active &&
+            (name.toLowerCase().includes(searchInput) || country.toLowerCase().includes(searchInput))
+        ));
     }, [searchInput]);
 
     const renderItem = ({ item: city }: RenderItemType) => (
@@ -28,25 +28,29 @@ const CitiesGrid = () => {
         />
     );
 
+    const handleChangeText = (text: string) => {
+        const trimmed = text.trim().toLowerCase();
+        setSearchInput(trimmed);
+    };
+
     return (
         <View style={styles.container}>
-            <TextInput
-                onChangeText={setSearchInput}
-                placeholder="Search..."
-                style={styles.searchInput}
+            {/* Grid Header */}
+            <CitiesGridHeader
+                onChangeText={handleChangeText}
             />
 
+            {/* Grid List */}
             <FlatList
-                data={actionCities}
+                data={activeCities}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={item => item.image}
-                numColumns={2}
+                scrollEnabled={activeCities.length > 0}
                 contentContainerStyle={styles.scrollViewContainer}
-                columnWrapperStyle={{ gap: 28 }}
                 ListEmptyComponent={CitiesGridNoResult}
             />
-        </View>
+        </View >
     );
 }
 
@@ -60,12 +64,5 @@ const styles = StyleSheet.create({
     scrollViewContainer: {
         gap: 24,
         paddingBottom: 36,
-    },
-    searchInput: {
-        marginVertical: 18,
-        borderWidth: 1,
-        borderColor: colors.gray,
-        borderRadius: 10,
-        padding: 12,
     }
 });
