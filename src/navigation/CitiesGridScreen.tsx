@@ -3,18 +3,14 @@ import { FlatList, StyleSheet, View } from "react-native";
 import CityView from "../components/CityView";
 import CitiesGridHeader from "../components/CitiesGridHeader";
 import CitiesGridNoResult from "../components/CitiesGridNoResult";
-import { MainScreenNavigationProp } from "../navigation";
 import mockData from "../__mock__/data.json";
+import { CitiesGridScreenProps } from "../navigation";
 import { CityType } from "../utils/types";
 import { colors } from "../utils";
 
 type RenderItemType = {
     item: CityType;
     index: number;
-}
-
-interface CitiesGridScreenProps {
-    navigation: MainScreenNavigationProp;
 }
 
 const CitiesGridScreen = ({ navigation }: CitiesGridScreenProps) => {

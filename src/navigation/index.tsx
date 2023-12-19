@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer, NavigationProp } from '@react-navigation/native';
+import { NavigationContainer, NavigationProp, RouteProp } from '@react-navigation/native';
 
 import CitiesGridScreen from './CitiesGridScreen';
 import CityDetailsScreen from './CityDetailsScreen';
@@ -32,5 +32,11 @@ const RootNaivgation = () => {
 
 export default RootNaivgation;
 
-// Home Screen
-export type MainScreenNavigationProp = NavigationProp<RootStackParamList, 'Main'>;
+export type CitiesGridScreenProps = {
+    navigation: NavigationProp<RootStackParamList, 'Main'>;
+}
+
+export type CityDetailsScreenProps = {
+    route: RouteProp<RootStackParamList, 'CityDetails'>;
+    navigation: NavigationProp<RootStackParamList, 'CityDetails'>;
+};
