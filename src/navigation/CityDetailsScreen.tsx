@@ -21,7 +21,7 @@ const CityDetailsScreen = ({ route, navigation }: CityDetailsScreenProps) => {
 
     useEffect(() => {
         const getWeather = async () => {
-            const unit = isInternationalUnit ? 'standard' : 'imperial';
+            const unit = isInternationalUnit ? 'metric' : 'imperial';
             try {
                 const res = await fetchWeather(name, unit);
                 setWeather(res as WeatherType);
